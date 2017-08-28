@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lag="en">
+	
+<head>
+<script type="text/javascript">window.baseurl = 'http://0.0.0.0:4000';</script>	
+<!-- Set title -->
+<title>Spack Packaging</title>
+
+<!-- Set character set -->
+<meta charset="utf-8">
+
+<!-- Set the viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Custom Fonts -->
+
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato" type="text/css">
+<link rel='stylesheet' href='//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css'>
+
+<!-- FontAwesome icons -->
+<link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+<!-- Script stuff -->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!-- MathJax -->
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<!-- custom scripts -->
+<!--<script src="/static/js/navbar.js"></script>-->
+	
+<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicon/apple-touch-icon.png?v=kPgaQXkxpR">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon/favicon-32x32.png?v=kPgaQXkxpR">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon/favicon-16x16.png?v=kPgaQXkxpR">
+<link rel="manifest" href="/static/img/favicon/manifest.json?v=kPgaQXkxpR">
+<link rel="mask-icon" href="/static/img/favicon/safari-pinned-tab.svg?v=kPgaQXkxpR" color="#5bbad5">
+<link rel="shortcut icon" href="/static/img/favicon/favicon.ico?v=kPgaQXkxpR">
+<meta name="msapplication-config" content="/static/img/favicon/browserconfig.xml?v=kPgaQXkxpR">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/static/css/main.css">
+<link rel="stylesheet" href="/static/css/pygments-default.css">
+
+</head>		
+
+<body>
+
+<div class="content-well">
+<h1>Spack Packaging</h1>
+<p>One of the most serious barriers to sharing code which scientists publish is the difficulty of creating adequate documentation to enable another person to properly build and run the necessary code. Not only that, but even with the most effort or best intentions, small changes made to their code may not make it into this package they are preparing for their peer scientist. These two reasons underscore the necessity of a better system for sending source code to a peer scientist and having them successfully build and run that code.</p>
+
+<figure class="img-card">
+	<img src="/static/img/spack-logo-220-LLNL.png" title="The Spack Logo" alt="The Spack Logo" width="200px" />
+	
+	<hr />
+	<figcaption>The Spack Logo</figcaption>
+	
+</figure>
+
+<p><a href="https://spack.readthedocs.io">Spack</a> is currently the best candidate to solve this problem. It provides a method of building a package along with all dependencies while also specifying for instance, which compiler to use. It allows multiple versions of these packages to be installed simultaneously and manages the running environment for these codes. Spack is also portable, it consists of a single directory in which all of its source code resides. Other codes come close to this functionality, but miss some of it which make them non-ideal candidates. Honorable mentions are: <a href="https://hashdist.github.io/">Hashdist</a>, <a href="https://nixos.org/nix/">Nix</a>, and <a href="https://easybuilders.github.io/easybuild/">EasyBuild</a>. Containers also fall short of this goal as they promote ‘black-box’ sharing whereby binary blobs are packaged into containers. This is better than nothing of course, however sharing the source code should be the end goal of any effort of sharing code.</p>
+
+<p>Currently however, spack falls short of this goal. I am currently working on implementing the following features after which I believe it will be ready to fill this gap.</p>
+
+<ul>
+  <li>Support for easy use of native system packages when they exist</li>
+  <li>Ability to automatically detect native system packages</li>
+  <li>Ability to create a ‘Spackfile’ similar to a Gemfile describing necessary packages needed in a runtime environment to run or develop a specific package</li>
+  <li>Easy method to create a self-contained spack ‘package’ containing all current spack code along with the source code for all necessary dependencies and the work itself. This package should just be able to be unpacked, and then the user should be able to have the ported along spack install and run the code provided</li>
+</ul>
+
+<p>After these features have been properly implemented, I’m planning on creating several demonstration packages and leading tutorials at conferences to spread awareness of this new technology.</p>
+
+
+<div class="date">Last Updated: Aug 28 2017</div>
+</div>
+
+
+<div class="navheader">
+	<div class="navboxtheme navbox2">
+	</div>
+	<div class="navboxtheme navbox1">
+		<img href="http://0.0.0.0:4000" class="navauthoricon" src="/static/img/MSK.jpg">
+		<div class="navnamebox">
+			<div class="navnamebox1">Matthew Krafczyk</div>
+			<div class="navnamebox2">Postdoctoral Research Associate</div>
+		</div>
+		<label class="navmenubutton">
+			<input type="checkbox">
+			<div class="navmenubackground">
+				<span class="fa fa-bars navmenuicon" aria-hidden="true"></span>
+			</div>
+			<div class="navbar navbartheme">
+				<ul>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/.">Home</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/topics.html">Topics</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/projects.html">Projects</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/posts">Posts</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/contact">Contact</a>
+					</li>
+				
+				</ul>
+			</div>
+		</label>
+	</div>
+</div>
+
+
+</body>	
+
+</html>	

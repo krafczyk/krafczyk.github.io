@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lag="en">
+	
+<head>
+<script type="text/javascript">window.baseurl = 'http://0.0.0.0:4000';</script>	
+<!-- Set title -->
+<title>Computational Reproducibility</title>
+
+<!-- Set character set -->
+<meta charset="utf-8">
+
+<!-- Set the viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Custom Fonts -->
+
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato" type="text/css">
+<link rel='stylesheet' href='//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css'>
+
+<!-- FontAwesome icons -->
+<link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+<!-- Script stuff -->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!-- MathJax -->
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<!-- custom scripts -->
+<!--<script src="/static/js/navbar.js"></script>-->
+	
+<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicon/apple-touch-icon.png?v=kPgaQXkxpR">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon/favicon-32x32.png?v=kPgaQXkxpR">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon/favicon-16x16.png?v=kPgaQXkxpR">
+<link rel="manifest" href="/static/img/favicon/manifest.json?v=kPgaQXkxpR">
+<link rel="mask-icon" href="/static/img/favicon/safari-pinned-tab.svg?v=kPgaQXkxpR" color="#5bbad5">
+<link rel="shortcut icon" href="/static/img/favicon/favicon.ico?v=kPgaQXkxpR">
+<meta name="msapplication-config" content="/static/img/favicon/browserconfig.xml?v=kPgaQXkxpR">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/static/css/main.css">
+<link rel="stylesheet" href="/static/css/pygments-default.css">
+
+</head>		
+
+<body>
+
+<div class="content-well">
+<h1>Computational Reproducibility</h1>
+<p>In recent years a few fields of science have been hit with reproducibility scandals. Initially precipitated by John Ioannidis’s study of reproducibility in clinical research <a href="#Ioannidis2005JAMA">[1, 2]</a>, the reproducibility crisis has expanded to include scientific domains like psychological science <a href="#aac4716">[3]</a> and cancer research <a href="#Begley2012">[4]</a>. Being experiment based, reproducing work in these domains is often time and resource intensive. Career pressures push scientists to go for new big results frequently. This creates a perverse incentive structure which encourages the production of dubious or outright fradulent results <a href="#Begley116">[5, 6]</a>. Indeed, researchers have a wide variety of tools at their disposal in order to publish dubious research such as choices in experimental design and p-value games.</p>
+
+<p>Computational sciences are different from purely experimental sciences in that the craft produces an inherently replicable record: The code. (Leaving asside for the moment that even single-threaded computational execution isn’t truly replicable <a href="#problem-of-reproducibility">[7, 8]</a>, We’ll assume for the moment that it’s close enough..). The existence of this defacto record means that results dependent on computational code should in principle be verifiable on nearly any computer (Barring special hardware constraints). I understand that there are many viable reasons why this is difficult most notably perhaps cross-platform development issues, however the existence of these problems does not preclude an effort to reduce their severity.</p>
+
+<p>Computational science has an opportunity to get ahead of this problem. In fact, some domains such as Astronomy <a href="#AGORA-II">[9]</a> and Density functional theory <a href="#reproducibility-benchmark-dft">[10]</a> have already recognized and started to solve it. This is a good start, but we can do much better. Very broadly, there are a number of issues which may prevent an article’s replication, or discourage a researcher from preparing their work sufficiently to allow replication. These issues fall into a number of rough catgories:</p>
+
+<ul>
+  <li>Software Practices</li>
+  <li>Legal Issues</li>
+  <li>Workflow related Issues</li>
+  <li>Hardware or Low-level Issues</li>
+</ul>
+
+<h2 id="types-of-reproducibility">Types of Reproducibility</h2>
+
+<p>Before I get too deep into it, I generally refer to the <a href="https://www.acm.org/publications/policies/artifact-review-badging">ACM definitions of reproducibility</a>. As an overview:</p>
+
+<ul>
+  <li><strong>Repeatability</strong>: When the same research team can get the same results when running the same experiment again.</li>
+  <li><strong>Replicability</strong>: When a different research team can get the same results using the same experimental setup as the other team</li>
+  <li><strong>Reproducibility</strong>: When a different research team can get the same results using a different experimental method.</li>
+</ul>
+
+<p>I understand that some of these terms may be controversial, however I am adapting the terms of the world I usually work in as this will ease my mental burden on a daily basis. Please bear with me.</p>
+
+<h1 id="software-practices">Software Practices</h1>
+
+<p>Certain software practices or impressions make reproducibility more difficult, or influence people’s opinions regarding whether or not they should release their code. Being careful to avoid falling into a few of these traps, or mitigating their consequences can improve the likelihood a given work can be replicated or reproduced.</p>
+
+<h2 id="greater-scrutiny">Greater Scrutiny</h2>
+
+<p>Sharing one’s code exposes not only their research, but coding practices to greater scrutiny. This is simply too much for some people and they refuse to go through the effort of prepraing their code for release as they’re going to be criticized no matter what. This just isn’t a rewarding activity for some people.</p>
+
+<p>I would remind however, that constructive criticism usually leads to better code, and may correct mistakes in your paper, or make your code more performant as an example.</p>
+
+<h2 id="work-is-part-of-a-large-repository">Work is part of a large repository</h2>
+
+<p>Code developed as part of a large collection of work often cannot easily be shared. This isn’t always a deal-breaker, however developers have to spend a lot of time to make sure test cases are correct and that other features in the code base don’t prevent their paper’s code from working on a multitude of computers.</p>
+
+<p>It is usually a good idea to develop logically separated libraries separately, and to use git’s submodule capability to tie together different works for the purposes of your research.</p>
+
+<h2 id="ad-hoc-packaging">Ad Hoc packaging</h2>
+
+<p>Researchers do not want to put in the work required to learn how to properly package their work. This results in ad hoc packages which are not cross-platform compatible, or which do not work outside the authors own computer. Such work really is worth the cost however. The result is maintainable code builds which can grow without inducing much extra work due to ever expanding makefiles and the like. Not only will it make developing code easier, but it will make sharing of complex code possible.</p>
+
+<h1 id="legal-issues">Legal Issues</h1>
+
+<p>Sometimes code cannot be developed without legal issues preventing or impeding its sharing. There is often no avoiding it, so here I discuss legal scenarios which often occur which will prevent scientific work from being reproduced.</p>
+
+<h2 id="work-may-concern-confidential-information">Work may Concern Confidential Information</h2>
+
+<p>In some cases, input data or parts of the code base may contain personally identifying information (PII) or confidential information which cannot be shared with the public. This is a common reason that code is not disclosed in the medical community. This can be mitigated however if great effort is taken to ensure that such information is missing from the code base.</p>
+
+<h2 id="work-may-concern-export-controlled-information">Work may Concern Export Controlled Information</h2>
+
+<p>Sometimes work is developed in secret as part of governmental efforts. This code is often export controlled, and cannot be shared with the public. In some cases however, citizens of that country can gain access to the code so even in these instances good coding practices should be followed to ensure ease of reproduction.</p>
+
+<h2 id="work-developed-under-license">Work Developed Under License</h2>
+
+<p>Sometimes work is developed by a group of people who feel they must protect their work as part of their competitive advantage. Whether or not this is right is another question I’ve written a <a href="/2017/08/28/opensource-and-code-sharing-comments.html">post</a> about, however it means that code can’t be shared with the public and replication is impossible. In some instances the license is permissive enough that there is a process to obtain the code which most people will be able to pass. In these instances, patches can be shared and replication should be possible.</p>
+
+<h1 id="hardware-or-low-level-issues">Hardware or Low-Level Issues</h1>
+
+<p>There are some hardware or low-level related issues which are impossible to avoid. Even under the best of circumstances for the most dilligent of researchers these will be a problem.</p>
+
+<h2 id="hardware-constraints">Hardware Constraints</h2>
+
+<p>In some cases, studies are done on unusually large computers, or with special computer components which makes replication difficult as they must use the same size or type of hardware. For example, there are FPGAs, GPUs, and now neuromorphic chips. These are all specialty or niche computing devices which have specialize compute characteristics which would have to be emulated on general purpose computers. In addition to this, large scale simulations may take place with the worlds leading edge Peta scale computers which would take a prohibitively long time using a more normal scale computer. This makes replicating such results difficult.</p>
+
+<h2 id="inherent-numerical-precision-issues">Inherent Numerical Precision Issues</h2>
+
+<p>Floating point arithmetic has limited precision and is not associative <a href="#ieee-754-2008">[11]</a>. This means differences in summation order in parts of a program on different runs can result in different output. Some scientific techniques are more sensitive to this issue requiring hundreds or even thousands of digits of precision after which normal floating point arithmetic is no longer enough <a href="#high-precision-arith-in-science">[12]</a>. Knowing that this variation exists and how it may affect the scientific output is then necessary in these cases so that scientists attempting to replicate the result know what kind of normal variation they may experience.</p>
+
+<h1 id="workflow-related-issues">Workflow Related Issues</h1>
+
+<p>Some reproducibility problems come about because of the way we work. Usually this results from a sloppy workflow or not being specific about what the research procedure or requirements are.</p>
+
+<h2 id="sloppy-workflows">Sloppy Workflows</h2>
+
+<p>Computationally based science often occurs in a weird world which is a combination of theory and practice. Often a theoretical descrpition of the proposed work is created after which the implementation is developed. This may lead to bugs which must be fixed. Sometimes these bugs actually change the theoretical description but the scientist doesn’t remember to update this description <a href="#elec-doc-res-new-meaning">[13, 14]</a>. This is why sharing the code generating a work’s results is so important. It is a truely accurate description of the algorithm which a paper cannot match.</p>
+
+<h2 id="incompatible-study-structures-and-requirements">Incompatible Study Structures and Requirements</h2>
+
+<p>This is a serious and pervasive issue in almost every science. When people conduct a study, each group looking at the matter will make different choices about how they select participants, or provide multiple choices. Or perhaps what the format of the input data is, (Image size for instance). This means that studies which would otherwise cover the same thing, cannot be compared in an apples-to-apples manner. In the realm of computational sciences, the availability of source code should help aleviate this issue as slightly different codes and datasets can be molded to fit each other’s restrictions more easily.</p>
+
+<h2 id="idealized-workflow-possibilities">Idealized Workflow Possibilities</h2>
+<p>As a thought experiment, I’ve developed three types of workflows which would be possible in a perfect world, but are currently either extremely difficult or impossible usually due to lack of source code transparance and usability.</p>
+
+<ul>
+  <li>Method Appropriation</li>
+  <li>Method Tweaking</li>
+  <li>Method Improvement</li>
+</ul>
+
+<p>Tools we as a community build should all take steps towards making these workflows easier.</p>
+
+<h3 id="method-appropriation">Method Appropriation</h3>
+
+<ol>
+  <li><strong>A</strong> is working on an airfoil using method <script type="math/tex">\boldsymbol{\alpha}</script>, but the simulation has a problem of some sort</li>
+  <li><strong>B</strong> published method <script type="math/tex">\boldsymbol{\beta}</script> which claims to fix said problem</li>
+  <li><strong>A</strong> reads <strong>B</strong>’s paper</li>
+  <li><strong>A</strong> downloads <strong>B</strong>’s materials, verifies the result</li>
+  <li><strong>A</strong> uses method <script type="math/tex">\boldsymbol{\beta}</script> to solve their problem</li>
+</ol>
+
+<h3 id="method-tweaking">Method Tweaking</h3>
+
+<ol>
+  <li><strong>A</strong> needs to simulate a large protein to find binding sites</li>
+  <li><strong>A</strong> finds method <script type="math/tex">\boldsymbol{\beta}</script> by <strong>B</strong> for simulating large proteins efficiently, but doesn’t find binding sites</li>
+  <li><strong>A</strong> download’s <strong>B</strong>’s materials, verifies the result</li>
+  <li><strong>A</strong> adds code to find binding sites to <script type="math/tex">\boldsymbol{\beta}</script> producing method <script type="math/tex">\boldsymbol{\alpha}</script></li>
+  <li><strong>A</strong> publishes method <script type="math/tex">\boldsymbol{\alpha}</script> citing <strong>B</strong>’s method <script type="math/tex">\boldsymbol{\beta}</script></li>
+</ol>
+
+<h3 id="method-improvement">Method Improvement</h3>
+
+<ol>
+  <li>Performing lattice QCD, <strong>A</strong> finds method <script type="math/tex">\boldsymbol{\beta}</script> by <strong>B</strong>.</li>
+  <li><strong>A</strong> spots mistake in method <script type="math/tex">\boldsymbol{\beta}</script> from article</li>
+  <li><strong>A</strong> downloads <strong>B</strong>’s materials, verifies the result</li>
+  <li><strong>A</strong> changes <script type="math/tex">\boldsymbol{\beta}</script> creating method <script type="math/tex">\boldsymbol{\alpha}</script> solving mistake</li>
+  <li><strong>A</strong> runs method <script type="math/tex">\boldsymbol{\alpha}</script> verifying better agreement with experimentally measured values</li>
+  <li><strong>A</strong> publishes <script type="math/tex">\boldsymbol{\alpha}</script> citing <strong>B</strong> about this change</li>
+</ol>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Awareness of the reproducibility problem is building in all sciences. Computational science has a chance to get ahead of this problem and create an example for other sciences to follow. While there are many issues affecting computational reproducibility, these issues can all be tackled or mitigated in some way. Raising awareness of these issues and building tools to help with these issues will improve research produced by all members of the community.</p>
+
+<h1 id="bibliography">Bibliography</h1>
+
+<ol class="bibliography"><li><span id="Ioannidis2005JAMA">I. JA, “Contradicted and initially stronger effects in highly cited clinical
+research,” <i>JAMA</i>, vol. 294, no. 2, pp. 218–228, 2005.</span>
+
+<a href="https://dx.doi.org/10.1001/jama.294.2.218">10.1001/jama.294.2.218</a>
+
+</li>
+<li><span id="Ioannidis2005Pmed">J. P. A. Ioannidis, “Why Most Published Research Findings Are False,” <i>PLOS Medicine</i>, vol. 2, no. 8, Aug. 2005.</span>
+
+<a href="https://dx.doi.org/10.1371/journal.pmed.0020124">10.1371/journal.pmed.0020124</a>
+
+</li>
+<li><span id="aac4716">O. S. Collaboration, “Estimating the reproducibility of psychological science,” <i>Science</i>, vol. 349, no. 6251, 2015.</span>
+
+<a href="https://dx.doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>
+
+</li>
+<li><span id="Begley2012">C. G. Begley and L. M. Ellis, “Drug development: Raise standards for preclinical cancer research,” <i>Nature</i>, vol. 483, no. 7391, pp. 531–533, 2012.</span>
+
+<a href="https://dx.doi.org/10.1038/483531a">10.1038/483531a</a>
+
+</li>
+<li><span id="Begley116">C. G. Begley and J. P. A. Ioannidis, “Reproducibility in Science,” <i>Circulation Research</i>, vol. 116, no. 1, pp. 116–126, 2014.</span>
+
+<a href="https://dx.doi.org/10.1161/CIRCRESAHA.114.303819">10.1161/CIRCRESAHA.114.303819</a>
+
+</li>
+<li><span id="schon-scandal">“Scandal Rocks Scientific Community.” .</span>
+
+<a href="http://www.dw.com/en/scandal-rocks-scientific-community/a-646321">http://www.dw.com/en/scandal-rocks-scientific-community/a-646321</a>
+
+</li>
+<li><span id="problem-of-reproducibility">D. Ince, “The Problem of Reproducibility,” <i>CHANCE</i>, vol. 25, no. 3, pp. 4–7, 2012.</span>
+
+<a href="https://dx.doi.org/10.1080/09332480.2012.726554">10.1080/09332480.2012.726554</a>
+
+</li>
+<li><span id="Monniaux:2008:PVF:1353445.1353446">D. Monniaux, “The Pitfalls of Verifying Floating-point Computations,” <i>ACM Trans. Program. Lang. Syst.</i>, vol. 30, no. 3, pp. 12:1–12:41, May 2008.</span>
+
+<a href="https://dx.doi.org/10.1145/1353445.1353446">10.1145/1353445.1353446</a>
+
+</li>
+<li><span id="AGORA-II">J.-hoon Kim <i>et al.</i>, “The AGORA High-resolution Galaxy Simulations Comparison Project. II. Isolated Disk Test,” <i>The Astrophysical Journal</i>, vol. 833, no. 2, p. 202, 2016.</span>
+
+<a href="http://stacks.iop.org/0004-637X/833/i=2/a=202">http://stacks.iop.org/0004-637X/833/i=2/a=202</a>
+
+</li>
+<li><span id="reproducibility-benchmark-dft">K. Lejaeghere <i>et al.</i>, “Reproducibility in density functional theory calculations of solids,” <i>Science</i>, vol. 351, no. 6280, 2016.</span>
+
+<a href="https://dx.doi.org/10.1126/science.aad3000">10.1126/science.aad3000</a>
+
+</li>
+<li><span id="ieee-754-2008">“IEEE Standard for Floating-Point Arithmetic,” <i>IEEE Std 754-2008</i>, pp. 1–70, Aug. 2008.</span>
+
+<a href="https://dx.doi.org/10.1109/IEEESTD.2008.4610935">10.1109/IEEESTD.2008.4610935</a>
+
+</li>
+<li><span id="high-precision-arith-in-science">D. H. Bailey, “High-precision floating-point arithmetic in scientific computation,” <i>Computing in Science Engineering</i>, vol. 7, no. 3, pp. 54–61, May 2005.</span>
+
+<a href="https://dx.doi.org/10.1109/MCSE.2005.52">10.1109/MCSE.2005.52</a>
+
+</li>
+<li><span id="elec-doc-res-new-meaning">J. F. Claerbout and M. Karrenbach, “Electronic documents give reproducible research a new meaning,” in <i>SEG Technical Program Expanded Abstracts</i>, 1992, pp. 601–604.</span>
+
+<a href="https://dx.doi.org/10.1190/1.1822162">10.1190/1.1822162</a>
+
+</li>
+<li><span id="stodden-reproducibility-crisis">D. L. Donoho, A. Maleki, I. U. Rahman, M. Shahram, and V. Stodden, “Reproducible Research in Computational Harmonic Analysis,” <i>Computing in Science &amp; Engineering</i>, vol. 11, no. 1, pp. 8–18, 2009.</span>
+
+<a href="https://dx.doi.org/10.1109/MCSE.2009.15">10.1109/MCSE.2009.15</a>
+
+</li></ol>
+
+
+
+<div class="date">Last Updated: Aug 28 2017</div>
+</div>
+
+
+<div class="navheader">
+	<div class="navboxtheme navbox2">
+	</div>
+	<div class="navboxtheme navbox1">
+		<img href="http://0.0.0.0:4000" class="navauthoricon" src="/static/img/MSK.jpg">
+		<div class="navnamebox">
+			<div class="navnamebox1">Matthew Krafczyk</div>
+			<div class="navnamebox2">Postdoctoral Research Associate</div>
+		</div>
+		<label class="navmenubutton">
+			<input type="checkbox">
+			<div class="navmenubackground">
+				<span class="fa fa-bars navmenuicon" aria-hidden="true"></span>
+			</div>
+			<div class="navbar navbartheme">
+				<ul>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/.">Home</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/topics.html">Topics</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/projects.html">Projects</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/posts">Posts</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/contact">Contact</a>
+					</li>
+				
+				</ul>
+			</div>
+		</label>
+	</div>
+</div>
+
+
+</body>	
+
+</html>	

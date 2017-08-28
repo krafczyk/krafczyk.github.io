@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lag="en">
+	
+<head>
+<script type="text/javascript">window.baseurl = 'http://0.0.0.0:4000';</script>	
+<!-- Set title -->
+<title>Building This Website</title>
+
+<!-- Set character set -->
+<meta charset="utf-8">
+
+<!-- Set the viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Custom Fonts -->
+
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato" type="text/css">
+<link rel='stylesheet' href='//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css'>
+
+<!-- FontAwesome icons -->
+<link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+<!-- Script stuff -->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!-- MathJax -->
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<!-- custom scripts -->
+<!--<script src="/static/js/navbar.js"></script>-->
+	
+<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicon/apple-touch-icon.png?v=kPgaQXkxpR">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon/favicon-32x32.png?v=kPgaQXkxpR">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon/favicon-16x16.png?v=kPgaQXkxpR">
+<link rel="manifest" href="/static/img/favicon/manifest.json?v=kPgaQXkxpR">
+<link rel="mask-icon" href="/static/img/favicon/safari-pinned-tab.svg?v=kPgaQXkxpR" color="#5bbad5">
+<link rel="shortcut icon" href="/static/img/favicon/favicon.ico?v=kPgaQXkxpR">
+<meta name="msapplication-config" content="/static/img/favicon/browserconfig.xml?v=kPgaQXkxpR">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/static/css/main.css">
+<link rel="stylesheet" href="/static/css/pygments-default.css">
+
+</head>		
+
+<body>
+
+<div class="content-well">
+<h1>Building This Website</h1>
+<p>The task of building this page was quite long. Join me while I give some highlights!</p>
+
+<h2 id="lofty-goals">Lofty Goals</h2>
+
+<p>My initial goal for this website was to build it completely from scratch and host it on my own server.</p>
+
+<p>However, with recent cybersecurity bugs such as <a href="https://en.wikipedia.org/wiki/Heartbleed">heartbleed</a>, <a href="https://en.wikipedia.org/wiki/Dirty_COW">Dirty COW</a>, and <a href="https://blog.qualys.com/securitylabs/2017/06/19/the-stack-clash">Stack Clash</a>, it became clear that it would not be advisable to host this website myself. I would need to be a cybersecurity expert to prevent as many nasty attacks as possible against my own computer, which I am not and do not have the time to become. I heard from a friend however, that Jekyll allowed static site generation and better yet, Github Pages offered free hosting for jekyll pages. This was my solution.</p>
+
+<h2 id="design">Design</h2>
+
+<p>I started by looking at Jekyll site templates but I did not find any I particularly liked. None seemed to have the level of control nor variety of abilities which I was interested in. I embarked on creating my own Jekyll website by first refreshing my CSS memory with a <a href="https://www.w3schools.com/css/default.asp">CSS tutorial at W3Schools</a>. Then I got to work prototyping this site.</p>
+
+<p>Selecting a font was difficult. I installed the <a href="https://chrome.google.com/webstore/detail/whatfont/jabopobgcpjmedljpbcaablpmlmfcogm?hl=en">What Font</a> google chrome plugin which allows you to easily inspect the fonts present on a web page. This coupled with viewing many alternative fonts in the <a href="https://fonts.google.com/">Google fonts</a> library allowed me to settle on the <a href="https://fonts.google.com/specimen/Lato">Lato</a> font. I also settled on the <a href="https://github.com/source-foundry/Hack">Hack</a> font for fixed-width code needs.</p>
+
+<p>As I intend this to be a scholarly blog complete with citations, I went looking for a citation solution which I found with the brilliant <a href="https://github.com/inukshuk/jekyll-scholar">Jekyll Scholar</a>. As good as it is however, my favorite citation scheme IEEE was not correctly implemented. I’ve implemented a temporary solution for this website, and in the future I will submit some PRs to fix up this problem. You can see the issues I’ve opened about this <a href="https://github.com/inukshuk/jekyll-scholar/issues/196">here</a> and <a href="https://github.com/inukshuk/jekyll-scholar/issues/198">here</a>.</p>
+
+<p>I intend to tweak and perhaps drastically change this website for years to come, so check in periodically for new blog posts and updates on my projects. I also anticipate to create a website about my personal life, so stay tuned for that.</p>
+
+<p>Here is a list of resources I found useful:</p>
+
+<ul>
+  <li><a href="https://www.w3schools.com/css/default.asp">W3Schools CSS</a>: CSS tutorials, examples, and references</li>
+  <li><a href="http://ricostacruz.com/cheatsheets/jekyll.html">Jekyll Cheatsheet</a>: A must have resource describing basic and commonly used patterns and settings for Jekyll.</li>
+  <li><a href="https://shopify.github.io/liquid/">liquid template library</a>: A must have resource when designing Jekyll pages. The liquid library is indispensible.</li>
+  <li><a href="https://github.com/inukshuk/jekyll-scholar">Jekyll Scholar</a>: An awesome jekyll plugin to manage citations.</li>
+  <li><a href="https://chrome.google.com/webstore/detail/whatfont/jabopobgcpjmedljpbcaablpmlmfcogm?hl=en">What Font</a>: Great for finding out what those awesome fonts are on your favorite websites!</li>
+  <li><a href="https://fonts.google.com/">Google fonts</a>: An awesome google cdn storing fonts with a great interface to see how these fonts look</li>
+  <li><a href="https://github.com/source-foundry/Hack">Hack</a>: An awesome fixed-width font not currently available on google fonts.</li>
+  <li><a href="https://css-tricks.com/the-checkbox-hack/">CSS Custom Checkboxes</a>: This site is also great for nifty CSS tricks in general.</li>
+  <li><a href="https://kramdown.gettalong.org/syntax.html">Kramdown Template Reference</a>: A must have resource when writing Jekyll content since I chose to use the kramdown markdown parser.</li>
+</ul>
+
+
+<div class="date">Last Updated: Aug 28 2017</div>
+</div>
+<div class="link-buttons">
+
+<span class="left-button no-link">
+	<div class="link-button">
+		<p class="link-button">Building This Website</p>
+		<p class="fa fa-chevron-left link-button"></p>
+	</div>
+</span>
+
+
+<a class="right-button" href="/2017/08/28/opensource-and-code-sharing-comments.html">
+	<div class="link-button">
+		<p class="fa fa-chevron-right link-button"></p>
+		<p class="link-button">Comments on Opensource and Code sharing</p>
+	</div>
+</a>
+
+</div>	
+
+
+<div class="navheader">
+	<div class="navboxtheme navbox2">
+	</div>
+	<div class="navboxtheme navbox1">
+		<img href="http://0.0.0.0:4000" class="navauthoricon" src="/static/img/MSK.jpg">
+		<div class="navnamebox">
+			<div class="navnamebox1">Matthew Krafczyk</div>
+			<div class="navnamebox2">Postdoctoral Research Associate</div>
+		</div>
+		<label class="navmenubutton">
+			<input type="checkbox">
+			<div class="navmenubackground">
+				<span class="fa fa-bars navmenuicon" aria-hidden="true"></span>
+			</div>
+			<div class="navbar navbartheme">
+				<ul>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/.">Home</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/topics.html">Topics</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/projects.html">Projects</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/posts">Posts</a>
+					</li>
+				
+					<li>
+					<a  href="http://0.0.0.0:4000/contact">Contact</a>
+					</li>
+				
+				</ul>
+			</div>
+		</label>
+	</div>
+</div>
+
+
+</body>	
+
+</html>	
